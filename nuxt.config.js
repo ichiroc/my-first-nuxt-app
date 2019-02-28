@@ -20,6 +20,12 @@ module.exports = {
   modules: [                    // modules に加えることで、対象となるモジュールが自動的に読み込まれる
     '@nuxtjs/axios'
   ],
+  plugins: [
+    '~/plugins/axios.js'
+  ],
+  env: {
+    QIITA_TOKEN: process.env.QIITA_TOKEN
+  },
   /*
   ** Build configuration
   */
