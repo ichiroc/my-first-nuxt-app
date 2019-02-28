@@ -22,15 +22,20 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
   export default {
     // asyncData はコンポーネント読み込み前に呼ばれるので、thisが使えない、その代替として app を利用する
     // さらにサーバー上でレンダリングされるので、すぐに表示される
-    async asyncData({app}) {
-      // axios-module を導入すると全てのVueコンポーネントに $axios が格納され、 $methodName で nuxt の設定に合わせたリクエストをしてくれる
-      const items = await app.$axios.$get('https://qiita.com/api/v2/items?query=tag:nuxt.js', true, '  ')
-      return {
-        items
+    async asyncData({store}) {
+      if(store.getters['items'].length) {
+        return
       }
+      await store.dispatch('fetchItems')
+    },
+    computed: {
+      // mapGetters を使ってstore の getter をこのコンポーネントの算出プロパティにマッピングする
+      ...mapGetters(['items'])
     }
   }
 </script>
