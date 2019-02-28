@@ -17,6 +17,9 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
+  modules: [                    // modules に加えることで、対象となるモジュールが自動的に読み込まれる
+    '@nuxtjs/axios'
+  ],
   /*
   ** Build configuration
   */
@@ -36,4 +39,3 @@ module.exports = {
     }
   }
 }
-
